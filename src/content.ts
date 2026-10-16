@@ -1,3 +1,31 @@
+export const site = {
+  name: "imp.so",
+  url: "https://imp.so/",
+  title: "imp.so — ephemeral agents on durable workflows",
+  tagline: "Ephemeral agents on durable workflows",
+  description:
+    "imp is an ephemeral agent framework for the software lifecycle. Each task summons a short-lived agent, an imp, inside a durable workflow.",
+};
+
+export const hero = {
+  title: "Put our imps to work.",
+  accent: "Ephemeral agents. Durable workflows.",
+  lede: "imp is an ephemeral agent framework for the software lifecycle. Each task summons a short-lived agent, an imp, inside a durable workflow. The imp does one job and exits. The workflow remembers everything, survives crashes and retries, and hands off to the next imp.",
+};
+
+export const lifecycleTitle = "Life of an imp";
+export const sdlcTitle = "Across the SDLC";
+
+export const durable = {
+  title: "The imp is temporary. The work is not.",
+  body: "Write the lifecycle as ordinary code. Each step is checkpointed, so a failed test, a crashed worker or a human review that takes three days picks up exactly where it stopped. Imps never hold state between steps, so there is nothing to drift and nothing to clean up.",
+};
+
+export const access = {
+  title: "Summon your first imp",
+  body: "We are onboarding teams in small batches. Drop us a line and we will send the SDK and a workflow to start from.",
+};
+
 export const phases = [
   {
     num: "01",

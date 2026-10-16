@@ -20,6 +20,17 @@ vp check --fix    # format + lint + typecheck
 
 `pnpm build` runs `tsc -b`, the client build, an SSR build of `src/entry-server.tsx`, then `scripts/prerender.mjs`, which renders `<App />` into `dist/index.html`. The client bundle hydrates that markup.
 
+## SEO and agent files
+
+Generated at build time from `src/content.ts` via `src/seo.ts`, so they never drift from the page:
+
+- `<head>`: title, description, canonical, Open Graph/Twitter tags, Schema.org JSON-LD (Organization, WebSite, WebPage, SoftwareApplication), `rel="alternate"` link to the Markdown copy, font preloads
+- `/index.md`: Markdown version of the page for agents
+- `/llms.txt`: [llms.txt](https://llmstxt.org) summary
+- `/sitemap.xml`: `lastmod` set to the build date
+
+`public/robots.txt` is static.
+
 ## Deploy
 
 Pushing to `main` runs `.github/workflows/pages.yml` (check → build → deploy `dist/` to Pages). Pull requests run check and build only.

@@ -4,7 +4,9 @@
   --color-bg: #f2f2f3;
   --color-surface: #e9e9ea;
   --color-text: #1d1f20;
-  --color-accent: #5980a6;
+  /* accent-700 rather than the original #5980a6 (3.7:1 on --color-bg) so accent text and
+     filled buttons meet WCAG AA contrast (~5.8:1). */
+  --color-accent: #416180;
   --color-accent-2: #728fab;
   --color-divider: color-mix(in srgb, #1d1f20 16%, transparent);
 
@@ -266,10 +268,10 @@ figcaption {
   color: var(--color-bg);
 }
 .btn-primary:hover {
-  background: var(--color-accent-600);
+  background: var(--color-accent-800);
 }
 .btn-primary:active {
-  background: var(--color-accent-700);
+  background: var(--color-accent-900);
 }
 .btn-secondary {
   border-color: var(--color-divider);

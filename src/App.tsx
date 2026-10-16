@@ -1,18 +1,25 @@
 import { Corners, ImpMark } from "./components/ImpMark.tsx";
 import {
+  access,
   accessEmail,
   accessMailto,
   codeFile,
   codeText,
   contactEmail,
+  durable,
+  hero,
+  lifecycleTitle,
   phases,
+  sdlcTitle,
+  site,
   stages,
 } from "./content.ts";
 
-function Eyebrow({ children }: { children: string }) {
+function Eyebrow({ children, heading }: { children: string; heading?: boolean }) {
+  const Tag = heading ? "h2" : "span";
   return (
     <>
-      <span className="eyebrow">{children}</span>
+      <Tag className="eyebrow">{children}</Tag>
       <div className="rule" />
     </>
   );
@@ -22,12 +29,12 @@ export default function App() {
   return (
     <>
       <nav className="nav site-nav">
-        <span className="nav-brand brand">
+        <a href="/" className="nav-brand brand">
           <span className="brand-mark">
             <ImpMark size={26} />
           </span>
-          imp.so
-        </span>
+          {site.name}
+        </a>
         <a href="#lifecycle">Lifecycle</a>
         <a href="#sdlc">SDLC</a>
         <a href="#durable">Workflows</a>
@@ -43,15 +50,10 @@ export default function App() {
             <span className="hero-fig-caption">Fig. 1 · one imp</span>
           </div>
           <h1 className="display">
-            <span>Put our imps to work.</span>
-            <span className="accent">Ephemeral agents. Durable workflows.</span>
+            <span>{hero.title}</span>
+            <span className="accent">{hero.accent}</span>
           </h1>
-          <p className="lede">
-            imp is an ephemeral agent framework for the software lifecycle. Each task summons a
-            short-lived agent, an imp, inside a durable workflow. The imp does one job and exits.
-            The workflow remembers everything, survives crashes and retries, and hands off to the
-            next imp.
-          </p>
+          <p className="lede">{hero.lede}</p>
           <div className="actions">
             <a href="#access" className="btn btn-primary blueprint on-accent">
               <Corners />
@@ -67,7 +69,7 @@ export default function App() {
           <div className="blueprint">
             <Corners />
             <div className="sheet-head">
-              <span className="sheet-title">Life of an imp</span>
+              <h2 className="sheet-title">{lifecycleTitle}</h2>
               <span className="sheet-meta">IMP-01</span>
               <span className="sheet-meta">Sheet 01 of 03</span>
             </div>
@@ -85,7 +87,7 @@ export default function App() {
         </section>
 
         <section id="sdlc" className="section">
-          <Eyebrow>02 · Across the SDLC</Eyebrow>
+          <Eyebrow heading>{`02 · ${sdlcTitle}`}</Eyebrow>
           <div className="grid-4 grid-4-gap">
             {stages.map((s) => (
               <div key={s.name} className="blueprint stage">
@@ -100,13 +102,8 @@ export default function App() {
         <section id="durable" className="durable">
           <div>
             <Eyebrow>03 · Durable by default</Eyebrow>
-            <h2 className="heading">The imp is temporary. The work is not.</h2>
-            <p className="muted durable-body">
-              Write the lifecycle as ordinary code. Each step is checkpointed, so a failed test, a
-              crashed worker or a human review that takes three days picks up exactly where it
-              stopped. Imps never hold state between steps, so there is nothing to drift and nothing
-              to clean up.
-            </p>
+            <h2 className="heading">{durable.title}</h2>
+            <p className="muted durable-body">{durable.body}</p>
           </div>
           <figure className="blueprint code-figure">
             <Corners />
@@ -120,11 +117,8 @@ export default function App() {
 
         <section id="access" className="section access">
           <Eyebrow>04 · Early access</Eyebrow>
-          <h2 className="heading">Summon your first imp</h2>
-          <p className="muted access-body">
-            We are onboarding teams in small batches. Drop us a line and we will send the SDK and a
-            workflow to start from.
-          </p>
+          <h2 className="heading">{access.title}</h2>
+          <p className="muted access-body">{access.body}</p>
           <div className="actions access-actions">
             <a href={accessMailto} className="btn btn-primary blueprint on-accent">
               <Corners />
@@ -135,7 +129,9 @@ export default function App() {
         </section>
 
         <footer className="footer">
-          <span>imp.so · ephemeral agents on durable workflows</span>
+          <span>
+            {site.name} · {site.tagline.toLowerCase()}
+          </span>
           <span>
             <a href={`mailto:${contactEmail}`}>{contactEmail}</a> · © 2026
           </span>

@@ -37,6 +37,9 @@ a:hover {
   padding-inline: max(clamp(20px, 5vw, 72px), calc((100% - 1200px) / 2 + clamp(20px, 5vw, 72px)));
   flex-wrap: wrap;
 }
+.nav a.brand {
+  font-size: 18px;
+}
 .brand {
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -123,6 +126,12 @@ a:hover {
 }
 
 /* Section labels */
+/* .eyebrow and .sheet-title are sometimes h2s for document outline; keep them visually small. */
+.eyebrow,
+.sheet-title {
+  margin: 0;
+  font-family: var(--font-body);
+}
 .eyebrow {
   display: block;
   font-size: 13px;
@@ -195,6 +204,10 @@ a:hover {
   font-weight: 600;
 }
 .sheet-title {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
   flex: 1;
   min-width: 16ch;
   padding: 12px 24px;
