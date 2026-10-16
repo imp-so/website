@@ -1,0 +1,320 @@
+/* Page layout for imp.so — ported from the original design export's inline styles. */
+
+body {
+  margin: 0;
+  text-wrap: pretty;
+}
+a {
+  color: var(--color-accent-700);
+}
+a:hover {
+  color: var(--color-accent-900);
+}
+.on-accent,
+.on-accent:hover,
+.nav a.on-accent,
+.nav a.on-accent:hover {
+  color: var(--color-bg);
+  text-decoration: none;
+}
+
+.imp-mark {
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  overflow: visible;
+}
+.imp-mark .fill {
+  fill: currentColor;
+  stroke: none;
+}
+
+/* Nav */
+.site-nav {
+  padding-inline: max(clamp(20px, 5vw, 72px), calc((100% - 1200px) / 2 + clamp(20px, 5vw, 72px)));
+  flex-wrap: wrap;
+}
+.brand {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text);
+}
+.brand-mark {
+  display: flex;
+  color: var(--color-accent-700);
+}
+
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 72px);
+}
+.section {
+  padding: 48px 0 60px;
+}
+.muted {
+  font-size: 15px;
+  line-height: 24px;
+  margin: 0;
+  color: color-mix(in srgb, var(--color-text) 78%, transparent);
+}
+.actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+.actions a {
+  text-decoration: none;
+}
+
+/* Hero */
+.hero {
+  padding: 96px 0 72px;
+  position: relative;
+}
+.hero-fig {
+  float: right;
+  margin: -24px 0 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-accent-700);
+  transform: rotate(8deg);
+  transition: transform 200ms;
+}
+.hero-fig:hover {
+  transform: rotate(-6deg) scale(1.08);
+}
+.hero-fig-caption {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  transform: rotate(-8deg);
+}
+.display {
+  font-family: var(--font-heading);
+  font-weight: var(--font-heading-weight);
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: 1.04;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin: 0 0 0 -0.052em;
+}
+.display span {
+  display: block;
+}
+.display .accent {
+  color: var(--color-accent-700);
+}
+.lede {
+  font-size: 18px;
+  line-height: 28px;
+  max-width: 60ch;
+  margin: 32px 0 0;
+}
+
+/* Section labels */
+.eyebrow {
+  display: block;
+  font-size: 13px;
+  line-height: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--color-accent-700);
+  margin-bottom: 12px;
+}
+.rule {
+  height: 1px;
+  background: var(--color-divider);
+  margin-bottom: 24px;
+}
+#sdlc .rule {
+  margin-bottom: 32px;
+}
+.heading {
+  font-family: var(--font-heading);
+  font-weight: var(--font-heading-weight);
+  font-size: 36px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+/* 4 → 2 → 1 column grid without media queries */
+.grid-4 {
+  display: grid;
+}
+.grid-4-tight {
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(
+      clamp(
+        clamp(calc(25% - 1px), (820px - 100%) * 999, calc(50% - 1px)),
+        (480px - 100%) * 999,
+        100%
+      ),
+      1fr
+    )
+  );
+}
+.grid-4-gap {
+  gap: 32px;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(
+      clamp(
+        clamp(calc(25% - 24px), (820px - 100%) * 999, calc(50% - 16px)),
+        (480px - 100%) * 999,
+        100%
+      ),
+      1fr
+    )
+  );
+}
+
+/* Lifecycle sheet */
+.sheet-head {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--color-divider);
+  font-size: 13px;
+  line-height: 24px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.sheet-title {
+  flex: 1;
+  min-width: 16ch;
+  padding: 12px 24px;
+}
+.sheet-meta {
+  padding: 12px 24px;
+  border-left: 1px solid var(--color-divider);
+  color: color-mix(in srgb, var(--color-text) 70%, transparent);
+}
+.phase {
+  padding: 24px;
+  border-right: 1px solid var(--color-divider);
+  border-bottom: 1px solid var(--color-divider);
+  margin: 0 -1px -1px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.phase-num {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-accent-700);
+  font-feature-settings: "tnum" 1;
+}
+.phase-name {
+  font-size: 28px;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+.phase-body {
+  flex: 1;
+}
+.phase-tag {
+  align-self: flex-start;
+}
+
+/* SDLC stages */
+.stage {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.stage-name {
+  font-size: 22px;
+  line-height: 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+/* Durable workflow */
+.durable {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: 32px clamp(24px, 5vw, 80px);
+  align-items: center;
+  padding: 48px 0 72px;
+}
+.durable-body {
+  margin-top: 20px;
+  max-width: 48ch;
+}
+.code-figure {
+  margin: 0;
+}
+.code-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--color-divider);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--color-text) 70%, transparent);
+}
+.code {
+  margin: 0;
+  padding: 20px;
+  overflow-x: auto;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 13px;
+  line-height: 22px;
+  color: var(--color-text);
+}
+
+/* Early access */
+.access {
+  padding-bottom: 48px;
+}
+.access-body {
+  margin-top: 16px;
+  max-width: 60ch;
+}
+.access-actions {
+  align-items: center;
+  margin-top: 24px;
+}
+.access-actions .btn {
+  min-height: 36px;
+}
+.access-actions a:not(.btn) {
+  font-size: 15px;
+  line-height: 24px;
+  text-decoration: underline;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 48px 0;
+  font-size: 13px;
+  line-height: 24px;
+  color: color-mix(in srgb, var(--color-text) 70%, transparent);
+}
