@@ -120,27 +120,21 @@ a:hover { color: var(--color-accent-900); }
     <span style="display: block; font-size: 13px; line-height: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: var(--color-accent-700); margin-bottom: 12px;">04 · Early access</span>
     <div style="height: 1px; background: var(--color-divider); margin-bottom: 24px;"></div>
     <h2 style="font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 36px; line-height: 1.1; text-transform: uppercase; letter-spacing: 0.02em; margin: 0;">Summon your first imp</h2>
-    <p style="font-size: 15px; line-height: 24px; margin: 16px 0 0; max-width: 60ch; color: color-mix(in srgb, var(--color-text) 78%, transparent);">We are onboarding teams in small batches. Leave an email and we will send the SDK and a workflow to start from.</p>
-    <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
-      <form onSubmit="{{ submit }}" style="display: flex; gap: var(--space-3); flex-wrap: wrap; max-width: 480px; margin-top: 24px;">
-        <input class="input" type="email" required="" placeholder="you@company.com" aria-label="Email address" style="flex: 1; min-width: 200px; min-height: 36px;">
-        <button type="submit" class="btn btn-primary blueprint" style="min-height: 36px;"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>Request access</button>
-      </form>
-    </sc-if>
-    <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
-      <p style="margin: 24px 0 0; font-size: 15px; line-height: 24px; color: var(--color-accent-700); font-weight: 600;">Got it. An imp has been dispatched to your inbox.</p>
-    </sc-if>
+    <p style="font-size: 15px; line-height: 24px; margin: 16px 0 0; max-width: 60ch; color: color-mix(in srgb, var(--color-text) 78%, transparent);">We are onboarding teams in small batches. Drop us a line and we will send the SDK and a workflow to start from.</p>
+    <div style="display: flex; gap: var(--space-3); flex-wrap: wrap; align-items: center; margin-top: 24px;">
+      <a href="mailto:access@imp.so?subject=imp.so%20early%20access&amp;body=Team%2Fcompany%3A%0AWhat%20we%20want%20imps%20to%20do%3A%0A" class="btn btn-primary blueprint" style="color: var(--color-bg); text-decoration: none; min-height: 36px;"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>Request access</a>
+      <a href="mailto:access@imp.so?subject=imp.so%20early%20access" style="font-size: 15px; line-height: 24px;">access@imp.so</a>
+    </div>
   </section>
 
   <footer style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding: 48px 0; font-size: 13px; line-height: 24px; color: color-mix(in srgb, var(--color-text) 70%, transparent);">
     <span>imp.so · ephemeral agents on durable workflows</span>
-    <span>© 2026</span>
+    <span><a href="mailto:hello@imp.so">hello@imp.so</a> · © 2026</span>
   </footer>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;headline&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Put our imps to work&quot;,&quot;The agentic SDLC, one imp at a time&quot;],&quot;default&quot;:&quot;Put our imps to work&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;codeLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;TypeScript&quot;,&quot;Python&quot;],&quot;default&quot;:&quot;TypeScript&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { sent: false };
   renderVals() {
     const lang = this.props.codeLang ?? "TypeScript";
     const hero = this.props.headline ?? "Put our imps to work";
@@ -153,9 +147,6 @@ class Component extends DCLogic {
         ? 'import { workflow, imp } from "@impso/sdk";\n\nexport const fixIssue = workflow("fix-issue",\n  async (ctx, issue) => {\n    const plan  = await imp("planner").run(ctx, { issue });\n    const patch = await imp("coder", { tools: ["git", "test"] })\n      .run(ctx, { plan });\n\n    await ctx.waitFor("review.approved");\n\n    return imp("shipper").run(ctx, { patch });\n  });'
         : 'from imp import workflow, imp\n\n@workflow("fix-issue")\nasync def fix_issue(ctx, issue):\n    plan  = await imp("planner").run(ctx, issue=issue)\n    patch = await imp("coder", tools=["git", "test"]).run(ctx, plan=plan)\n\n    await ctx.wait_for("review.approved")\n\n    return await imp("shipper").run(ctx, patch=patch)',
       codeFile: lang === "TypeScript" ? "fix-issue.ts" : "fix_issue.py",
-      sent: this.state.sent,
-      notSent: !this.state.sent,
-      submit: (e) => { e.preventDefault(); this.setState({ sent: true }); },
       phases: [
         { num: "01", name: "Summon", body: "A workflow step spawns an imp with only the context and tools that step needs.", keeps: "Persists: inputs" },
         { num: "02", name: "Work", body: "The imp plans, edits and runs tests. Every tool call is recorded as a workflow event.", keeps: "Persists: event log" },
